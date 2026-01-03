@@ -1,0 +1,144 @@
+/* RESET */
+* {
+	box-sizing: border-box;
+}
+
+/* SCREEN */
+.quiz-form {
+	min-height: 100vh;
+	padding: 24px;
+	background: linear-gradient(135deg, #6366f1, #38bdf8);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: "Poppins", sans-serif;
+}
+
+/* HEADER SPACING (QuizHeader already styled separately) */
+.quiz-form > * {
+	width: 100%;
+	max-width: 420px;
+}
+
+/* META CARD */
+.quiz-meta {
+	background: white;
+	padding: 22px;
+	border-radius: 20px;
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	margin-bottom: 24px;
+}
+
+/* INPUTS & SELECTS */
+.quiz-meta select,
+.quiz-meta input {
+	padding: 14px;
+	border-radius: 12px;
+	border: 1px solid #cbd5e1;
+	font-size: 1rem;
+	width: 100%;
+}
+
+.quiz-meta select:focus,
+.quiz-meta input:focus {
+	outline: none;
+	border-color: #6366f1;
+	box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+/* QUESTION CARD (wraps QuestionCard component) */
+.quiz-card {
+	background: white;
+	padding: 20px;
+	border-radius: 18px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+	margin-bottom: 18px;
+}
+
+.quiz-card h4 {
+	margin-bottom: 12px;
+	color: #1e293b;
+}
+
+/* QUESTION INPUT */
+.quiz-card input {
+	width: 100%;
+	padding: 12px;
+	border-radius: 10px;
+	border: 1px solid #cbd5e1;
+	margin-bottom: 12px;
+	font-size: 0.95rem;
+}
+
+/* OPTION INPUTS (OptionInput component assumed) */
+.option-input {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.option-input input[type="text"] {
+	flex: 1;
+	padding: 10px;
+	border-radius: 10px;
+	border: 1px solid #cbd5e1;
+}
+
+.option-input input[type="radio"] {
+	transform: scale(1.2);
+	cursor: pointer;
+}
+
+/* ADD QUESTION BUTTON */
+.quiz-form > button[type="button"] {
+	background: #22c55e;
+	color: white;
+	border: none;
+	padding: 14px;
+	border-radius: 14px;
+	font-size: 1.05rem;
+	font-weight: 600;
+	cursor: pointer;
+	margin-bottom: 14px;
+	transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.quiz-form > button[type="button"]:hover {
+	transform: scale(1.03);
+	opacity: 0.95;
+}
+
+/* SAVE BUTTON */
+.quiz-form .submit {
+	background: #0ea5e9;
+	color: white;
+	border: none;
+	padding: 16px;
+	border-radius: 16px;
+	font-size: 1.1rem;
+	font-weight: 700;
+	cursor: pointer;
+	margin-bottom: 30px;
+	box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
+	transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.quiz-form .submit:hover {
+	transform: scale(1.04);
+	opacity: 0.95;
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+	.quiz-form {
+		justify-content: center;
+	}
+
+	.quiz-form > * {
+		max-width: 480px;
+	}
+}
