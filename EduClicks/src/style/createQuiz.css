@@ -1,0 +1,16 @@
+.quiz-card{
+    background: #f3f4f6;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+.option-row{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+.submit{
+    background: #22c55e;
+    color: white;
+}
