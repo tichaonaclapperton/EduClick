@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TeacherQuizResults from "./TeacherQuizResults";
+import TeacherQuizResults from "./TeacherQuizResult";
 import "../style/TeacherDashBoard.css";
 
 export default function TeacherDashBoard({ subjects = [], setSubjects }) {
