@@ -1,0 +1,102 @@
+/* RESET */
+* {
+	box-sizing: border-box;
+}
+
+/* MOBILE FIRST */
+.login-screen {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(135deg, #4dabf7, #74c0fc);
+	padding: 20px;
+	font-family: "Poppins", sans-serif;
+}
+
+/* APP TITLE */
+.app-title {
+	font-size: 2.5rem;
+	color: white;
+	margin-bottom: 5px;
+}
+
+.subtitle {
+	color: #e7f5ff;
+	margin-bottom: 25px;
+}
+
+/* LOGIN CARD */
+.login-card {
+	background: white;
+	width: 100%;
+	max-width: 360px;
+	padding: 25px;
+	border-radius: 20px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+/* INPUTS */
+.login-card input {
+	padding: 14px;
+	border-radius: 12px;
+	border: 1px solid #ced4da;
+	font-size: 1rem;
+}
+
+/* BUTTONS */
+.login-card button {
+	padding: 15px;
+	border-radius: 15px;
+	border: none;
+	font-size: 1.05rem;
+	cursor: pointer;
+	font-weight: 600;
+}
+
+/* ROLE COLORS */
+.learner-btn {
+	background: #51cf66;
+	color: white;
+}
+
+.teacher-btn {
+	background: #ffd43b;
+	color: #333;
+}
+
+.parent-btn {
+	background: #845ef7;
+	color: white;
+}
+
+/* BUTTON FEEDBACK */
+.login-card button:hover {
+	opacity: 0.9;
+}
+
+/* TABLET */
+@media (min-width: 600px) {
+	.app-title {
+		font-size: 3rem;
+	}
+
+	.login-card {
+		padding: 30px;
+	}
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+	.login-screen {
+		flex-direction: row;
+	}
+
+	.login-card {
+		max-width: 420px;
+	}
+}
