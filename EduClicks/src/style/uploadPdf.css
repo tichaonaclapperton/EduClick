@@ -1,0 +1,87 @@
+/* RESET */
+* {
+	box-sizing: border-box;
+}
+
+/* SCREEN */
+.upload-screen {
+	min-height: 100vh;
+	padding: 24px;
+	background: linear-gradient(135deg, #6366f1, #38bdf8);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: "Poppins", sans-serif;
+}
+
+/* TITLE */
+.upload-screen h2 {
+	color: white;
+	font-size: 2rem;
+	margin-bottom: 6px;
+}
+
+.upload-screen .subtitle {
+	color: #e0f2fe;
+	margin-bottom: 24px;
+	text-align: center;
+}
+
+/* CARD */
+.upload-card {
+	background: white;
+	width: 100%;
+	max-width: 380px;
+	padding: 26px;
+	border-radius: 20px;
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+/* SELECT & INPUT */
+.upload-card select,
+.upload-card input[type="file"] {
+	padding: 14px;
+	border-radius: 12px;
+	border: 1px solid #cbd5e1;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.upload-card select:focus,
+.upload-card input:focus {
+	outline: none;
+	border-color: #6366f1;
+	box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+/* BUTTON */
+.upload-btn {
+	background: #22c55e;
+	color: white;
+	border: none;
+	padding: 14px;
+	border-radius: 14px;
+	font-size: 1.05rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.upload-btn:hover {
+	transform: scale(1.03);
+	opacity: 0.95;
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+	.upload-screen {
+		justify-content: center;
+	}
+
+	.upload-card {
+		max-width: 420px;
+	}
+}
