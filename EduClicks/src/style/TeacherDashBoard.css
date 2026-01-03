@@ -1,0 +1,175 @@
+.teacher-screen {
+	padding: 20px;
+	background: linear-gradient(135deg, #4dabf7, #74c0fc);
+}
+
+.subtitle {
+	color: #6b7280;
+	margin-bottom: 20px;
+}
+
+
+.teacher-screen {
+	padding: 1rem;
+}
+
+.actions {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+	.actions {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.action-btn {
+	padding: 10px 14px;
+	border-radius: 12px;
+	border: none;
+	cursor: pointer;
+	background: #e5e7eb;
+	font-weight: bold;
+}
+
+.action-btn.primary {
+	background: #60a5fa;
+	color: white;
+}
+
+.learner-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	gap: 14px;
+	margin-bottom: 30px;
+}
+
+.learner-card {
+	background: white;
+	padding: 14px;
+	border-radius: 16px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+	text-align: center;
+}
+
+
+/* SUBJECT GRID */
+.subjects-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	gap: 1rem;
+	margin-top: 1rem;
+}
+.subject-card.featured {
+	grid-column: 1 / -1;
+	border-left: 8px solid #4f46e5;
+	background: linear-gradient(135deg, #eef2ff, #ffffff);
+}
+
+
+/* Tablets */
+@media (min-width: 600px) {
+	.subjects-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+	.subjects-grid {
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));;
+	}
+}
+
+/* SUBJECT CARD */
+.subject-card {
+	background: #ffffff;
+	border-radius: 16px;
+	padding: 1rem;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+.subject-card.featured h3 {
+	font-size: 1.4rem;
+	color: #4f46e5;
+}
+
+
+/* TERM CARD */
+.term-card {
+	background: #f8f9ff;
+	border-radius: 12px;
+	padding: 0.75rem;
+	margin-top: 0.75rem;
+}
+
+/* QUIZ CARD */
+.quiz-card {
+	background: #ffffff;
+	border-radius: 12px;
+	padding: 0.75rem;
+	margin-top: 0.5rem;
+	border-left: 6px solid #4f46e5;
+}
+
+
+/* QUIZ ACTIONS */
+.quiz-actions {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+}
+
+.quiz-actions button {
+	flex: 1;
+	border-radius: 10px;
+	padding: 0.4rem;
+}
+
+/* DELETE BUTTON */
+button.danger {
+	background: #ef4444;
+	color: white;
+}
+
+
+.subject-card {
+	
+	/* width: 160px; */
+	gap: 14px;
+	background: white;
+	padding: 16px;
+	border-radius: 18px;
+	margin-bottom: 24px;
+	box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+}
+
+.term-card {
+	background: #f3f4f6;
+	padding: 12px;
+	border-radius: 14px;
+	margin-top: 10px;
+}
+
+
+
+.quiz-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.badge {
+	background: #fde68a;
+	padding: 4px 10px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.muted {
+	color: #9ca3af;
+}
+
+

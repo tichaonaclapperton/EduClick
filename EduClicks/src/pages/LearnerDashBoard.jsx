@@ -1,5 +1,5 @@
 import Subcard from "../components/Subcard";
-import "../style/learner.css";
+import "../style/learnerDashBoard.css";
 
 export default function LearnerDashBoard({ subjects = [] }) {
 	// Guard: still loading / invalid data
