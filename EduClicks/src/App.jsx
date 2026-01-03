@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Splash from "./pages/Splash";
 import Login from "./pages/Login";
 import LearnerDashBoard from "./pages/LearnerDashBoard";
-import ParentDashBoard from "./pages/ParentDashBoard";
+// import ParentDashBoard from "./pages/ParentDashBoard";
 import TeacherDashBoard from "./pages/TeacherDashBoard";
 import CreateQuiz from "./pages/CreateQuiz";
 import EditQuiz from "./pages/EditQuiz";
@@ -13,7 +13,7 @@ import LearnerQuiz from "./pages/LearnerQuiz";
 import PdfViewer from "./pages/PdfViewer";
 import UploadPdf from "./pages/UploadPdf";
 
-import { subjects as initialSubjects } from "./Data/subjects";
+import { subjects as initialSubjects } from "./data/subjects";
 
 export default function App() {
 	/* ---------------- STATE ---------------- */
