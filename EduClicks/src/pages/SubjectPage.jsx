@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { afrikaansSyllabus } from "../Data/afrikaansSyllabus";
+import { afrikaansSyllabus } from "../data/afrikaansSyllabus";
 import '../style/subjectPage.css'
 
 export default function SubjectPage({ subjects = [] }) {
