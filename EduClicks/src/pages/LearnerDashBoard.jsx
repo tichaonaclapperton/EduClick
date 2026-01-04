@@ -1,4 +1,4 @@
-import Subcard from "../components/Subcard";
+import SubCard from "../components/SubCard";
 import "../style/learnerDashBoard.css";
 
 export default function LearnerDashBoard({ subjects = [] }) {
@@ -34,7 +34,7 @@ export default function LearnerDashBoard({ subjects = [] }) {
 
 				<div className="subject-grid">
 					{subjects.map((subject) => (
-						<Subcard key={subject.id} subject={subject} />
+						<SubCard key={subject.id} subject={subject} />
 					))}
 				</div>
 			</section>

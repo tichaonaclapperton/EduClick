@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Subcard({ subject }) {
+export default function SubCard({ subject }) {
 	const navigate = useNavigate();
 
 	// ✅ SAFELY handle missing terms
