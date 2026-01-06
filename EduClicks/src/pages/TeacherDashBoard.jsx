@@ -84,7 +84,7 @@ export default function TeacherDashBoard({ subjects = [], setSubjects }) {
 						<div key={learner.id} className="learner-card">
 							<h4>{learner.name}</h4>
 							<p>{learner.subject}</p>
-							<progress value={learner.progress} max="100" />
+							<progress className="pro" value={learner.progress} max="100" />
 							<span>{learner.progress}%</span>
 						</div>
 					))}

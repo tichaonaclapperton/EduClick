@@ -1,6 +1,6 @@
 .teacher-screen {
 	padding: 20px;
-	background: linear-gradient(135deg, #4dabf7, #74c0fc);
+	background: linear-gradient(135deg, #4dabf7, #34b465);
 }
 
 .subtitle {
@@ -8,6 +8,9 @@
 	margin-bottom: 20px;
 }
 
+.pro {
+	width: 100%;
+}
 
 .teacher-screen {
 	padding: 1rem;
@@ -54,7 +57,6 @@
 	text-align: center;
 }
 
-
 /* SUBJECT GRID */
 .subjects-grid {
 	display: grid;
@@ -68,10 +70,13 @@
 	background: linear-gradient(135deg, #eef2ff, #ffffff);
 }
 
-
 /* Tablets */
 @media (min-width: 600px) {
 	.subjects-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.learner-card {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
@@ -79,7 +84,7 @@
 /* Desktop */
 @media (min-width: 1024px) {
 	.subjects-grid {
-		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));;
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 	}
 }
 
@@ -94,7 +99,6 @@
 	font-size: 1.4rem;
 	color: #4f46e5;
 }
-
 
 /* TERM CARD */
 .term-card {
@@ -112,7 +116,6 @@
 	margin-top: 0.5rem;
 	border-left: 6px solid #4f46e5;
 }
-
 
 /* QUIZ ACTIONS */
 .quiz-actions {
@@ -133,10 +136,9 @@ button.danger {
 	color: white;
 }
 
-
 .subject-card {
-	
 	/* width: 160px; */
+	border-left: 6px solid #4f46e5;
 	gap: 14px;
 	background: white;
 	padding: 16px;
@@ -151,8 +153,6 @@ button.danger {
 	border-radius: 14px;
 	margin-top: 10px;
 }
-
-
 
 .quiz-header {
 	display: flex;
@@ -171,5 +171,3 @@ button.danger {
 .muted {
 	color: #9ca3af;
 }
-
-
