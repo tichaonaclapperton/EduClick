@@ -1,74 +1,77 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { afrikaansSyllabus } from "../data/afrikaansSyllabus";
-import '../style/subjectPage.css'
+import { syllabusBySubject } from "../Data/syllabus";
+import "../style/subjectPage.css";
 
 export default function SubjectPage({ subjects = [] }) {
-  const { subjectId } = useParams();
-  const navigate = useNavigate();
+	const { subjectId } = useParams();
+	const navigate = useNavigate();
 
-  const subject = subjects.find((s) => s.id === subjectId);
-  if (!subject) return <p>Subject not found</p>;
+	const subject = subjects.find((s) => s.id === subjectId);
+	if (!subject) return <p>Subject not found</p>;
 
-  const subjectTerms = Array.isArray(subject.terms) ? subject.terms : [];
-  const syllabus = subjectId === "afr" ? afrikaansSyllabus : [];
+	const subjectTerms = Array.isArray(subject.terms) ? subject.terms : [];
 
-  return (
-    <div className="screen">
-      <h2>{subject.name}</h2>
+	const syllabus = syllabusBySubject[subjectId];
+	if (!syllabus) {
+		return <p className="error">Subject syllabus not found</p>;
+	}
 
-      {syllabus.map((syllTerm) => {
-        const termData = subjectTerms.find(
-          (t) => t.term === syllTerm.term
-        );
+	return (
+		<div className="screen">
+			<h2>{subject.name}</h2>
 
-        const quizzes = termData?.quizzes || [];
+			{syllabus.map((syllTerm) => {
+				const termData = subjectTerms.find((t) => t.term === syllTerm.term);
 
-        return (
-          <div key={syllTerm.term} className="term-block">
-            <h3>Term {syllTerm.term}</h3>
+				const quizzes = termData?.quizzes || [];
 
-            
-            {syllTerm.pdf && (
-                       <button className="pdf-btn"
-                       onClick={() => navigate('/pdf', {state:{pdf:syllTerm.pdf}})}>
-                            View Term Pdf
-                       </button>
-                    )}
+				return (
+					<div key={syllTerm.term} className="term-block">
+						<h3>Term {syllTerm.term}</h3>
 
-            {/* TOPICS */}
-            {syllTerm.topics?.map((topic, i) => (
-              <div key={i} className="topic">
-                <strong>{topic.title}</strong>
-                <ul>
-                  {topic.items.map((item, j) => (
-                    <li key={j}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+						{syllTerm.pdf && (
+							<button
+								className="pdf-btn"
+								onClick={() =>
+									navigate("/pdf", { state: { pdf: syllTerm.pdf } })
+								}
+							>
+								View Term Pdf
+							</button>
+						)}
 
-            {/* QUIZZES */}
-            <h4>Quizzes</h4>
+						{/* TOPICS */}
+						{syllTerm.topics?.map((topic, i) => (
+							<div key={i} className="topic">
+								<strong>{topic.title}</strong>
+								<ul>
+									{topic.items.map((item, j) => (
+										<li key={j}>{item}</li>
+									))}
+								</ul>
+							</div>
+						))}
 
-            {quizzes.length > 0 ? (
-              quizzes.map((quiz, i) => (
-                <button
-                  key={i}
-                  onClick={() =>
-                    navigate(
-                      `/quiz/${subject.id}/${syllTerm.term}/${i}`
-                    )
-                  }
-                >
-                  📝 {quiz.title}
-                </button>
-              ))
-            ) : (
-              <p>No quizzes for this term</p>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
+						{/* QUIZZES */}
+						<h4>Quizzes</h4>
+
+						{quizzes.length > 0 ? (
+							quizzes.map((quiz, i) => (
+								<button
+									key={i}
+									onClick={() =>
+										navigate(`/quiz/${subject.id}/${syllTerm.term}/${i}`)
+									}
+								>
+									📝 {quiz.title}
+								</button>
+							))
+						) : (
+							<p>No quizzes for this term</p>
+						)}
+					</div>
+				);
+			})}
+		</div>
+	);
 }
