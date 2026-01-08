@@ -1,15 +1,22 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { syllabusBySubject } from "../Data/syllabus";
+import { syllabusBySubject } from "../data/syllabus";
 import "../style/subjectPage.css";
 
 export default function SubjectPage({ subjects = [] }) {
 	const { subjectId } = useParams();
 	const navigate = useNavigate();
+	console.log("Subjects:", subjects);
+	console.log(
+		"Subjects IDs:",
+		subjects.map((s) => s.id)
+	);
+	console.log("📌 subjectId:", subjectId);
+	console.log("📚 syllabus keys:", Object.keys(syllabusBySubject));
 
 	const subject = subjects.find((s) => s.id === subjectId);
 	if (!subject) return <p>Subject not found</p>;
 
-	const subjectTerms = Array.isArray(subject.terms) ? subject.terms : [];
+	const subjectTerms = subject?.terms ?? [];
 
 	const syllabus = syllabusBySubject[subjectId];
 	if (!syllabus) {
@@ -18,16 +25,28 @@ export default function SubjectPage({ subjects = [] }) {
 
 	return (
 		<div className="screen">
-			<h2>{subject.name}</h2>
+			<h2>{syllabus.name}</h2>
 
-			{syllabus.map((syllTerm) => {
+			{syllabus.terms.map((syllTerm) => {
 				const termData = subjectTerms.find((t) => t.term === syllTerm.term);
 
-				const quizzes = termData?.quizzes || [];
+				const quizzes = termData?.quizzes ?? [];
 
 				return (
 					<div key={syllTerm.term} className="term-block">
 						<h3>Term {syllTerm.term}</h3>
+
+						{Array.isArray(syllTerm.topics) &&
+							syllTerm.topics.map((topic, i) => (
+								<div key={i} className="topic">
+									<strong>{topic.title}</strong>
+									<ul>
+										{topic.items.map((item, j) => (
+											<li key={j}>{item}</li>
+										))}
+									</ul>
+								</div>
+							))}
 
 						{syllTerm.pdf && (
 							<button
@@ -39,18 +58,6 @@ export default function SubjectPage({ subjects = [] }) {
 								View Term Pdf
 							</button>
 						)}
-
-						{/* TOPICS */}
-						{syllTerm.topics?.map((topic, i) => (
-							<div key={i} className="topic">
-								<strong>{topic.title}</strong>
-								<ul>
-									{topic.items.map((item, j) => (
-										<li key={j}>{item}</li>
-									))}
-								</ul>
-							</div>
-						))}
 
 						{/* QUIZZES */}
 						<h4>Quizzes</h4>
