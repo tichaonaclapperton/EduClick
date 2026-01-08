@@ -1,0 +1,46 @@
+{
+	"id": "hist",
+	"name": "History",
+	"terms": [
+		{
+			"term": 1,
+			"pdf": "/terms/history/term-1.pdf",
+			"topics": [
+				{
+					"title": "Spellings",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		},
+		{
+			"term": 2,
+			"pdf": "/terms/history/term-2.pdf",
+			"topics": [
+				{
+					"title": "Spellings",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		},
+		{
+			"term": 3,
+			"pdf": "/terms/history/term-3.pdf",
+			"topics": [
+				{
+					"title": "Spellings",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		},
+		{
+			"term": 4,
+			"pdf": "/terms/history/term-4.pdf",
+			"topics": [
+				{
+					"title": "Spellings",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		}
+	]
+}

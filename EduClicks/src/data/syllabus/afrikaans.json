@@ -1,0 +1,46 @@
+{
+	"id": "afri",
+	"name": "Afrikaans",
+	"terms": [
+		{
+			"term": 1,
+			"pdf": "/terms/afrikaans/term-1.pdf",
+			"topics": [
+				{
+					"title": "Reading",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		},
+		{
+			"term": 2,
+			"pdf": "/terms/afrikaans/term-2.pdf",
+			"topics": [
+				{
+					"title": "Reading",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		},
+		{
+			"term": 3,
+			"pdf": "/terms/afrikaans/term-3.pdf",
+			"topics": [
+				{
+					"title": "Reading",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		},
+		{
+			"term": 4,
+			"pdf": "/terms/afrikaans/term-4.pdf",
+			"topics": [
+				{
+					"title": "Reading",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		}
+	]
+}

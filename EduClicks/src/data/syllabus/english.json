@@ -1,0 +1,46 @@
+{
+	"id": "eng",
+	"name": "English",
+	"terms": [
+		{
+			"term": 1,
+			"pdf": "/terms/english/term-1.pdf",
+			"topics": [
+				{
+					"title": "Spellings",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		},
+		{
+			"term": 2,
+			"pdf": "/terms/english/term-2.pdf",
+			"topics": [
+				{
+					"title": "Spellings",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		},
+		{
+			"term": 3,
+			"pdf": "/terms/english/term-3.pdf",
+			"topics": [
+				{
+					"title": "Spellings",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		},
+		{
+			"term": 4,
+			"pdf": "/terms/english/term-4.pdf",
+			"topics": [
+				{
+					"title": "Spellings",
+					"items": ["Greetings", "Simple conversation"]
+				}
+			]
+		}
+	]
+}
