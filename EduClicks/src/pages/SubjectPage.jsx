@@ -5,14 +5,6 @@ import "../style/subjectPage.css";
 export default function SubjectPage({ subjects = [] }) {
 	const { subjectId } = useParams();
 	const navigate = useNavigate();
-	console.log("Subjects:", subjects);
-	console.log(
-		"Subjects IDs:",
-		subjects.map((s) => s.id)
-	);
-	console.log("📌 subjectId:", subjectId);
-	console.log("📚 syllabus keys:", Object.keys(syllabusBySubject));
-
 	const subject = subjects.find((s) => s.id === subjectId);
 	if (!subject) return <p>Subject not found</p>;
 
