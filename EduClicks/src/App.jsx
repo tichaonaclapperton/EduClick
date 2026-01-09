@@ -17,9 +17,19 @@ import { generateSubjects } from "./data/generateSubjects";
 
 export default function App() {
 	/* ---------------- STATE ---------------- */
+
+	const SUBJECTS_VERSION = "v2";
 	const [subjects, setSubjects] = useState(() => {
 		const saved = localStorage.getItem("subjects");
-		return saved ? JSON.parse(saved) : generateSubjects();
+		const savedVersion = localStorage.getItem("subjects_version");
+
+		if (saved && savedVersion === SUBJECTS_VERSION) {
+			return JSON.parse(saved);
+		}
+
+		const fresh = generateSubjects();
+		localStorage.setItem("subjects_version", SUBJECTS_VERSION);
+		return fresh;
 	});
 
 	/* ---------------- PERSIST DATA ---------------- */
