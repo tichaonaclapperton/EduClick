@@ -1,4 +1,5 @@
 import SubCard from "../components/SubCard";
+import { useState, useEffect } from "react";
 import "../style/learnerDashBoard.css";
 
 export default function LearnerDashBoard({ subjects = [] }) {
@@ -6,6 +7,20 @@ export default function LearnerDashBoard({ subjects = [] }) {
 	if (!Array.isArray(subjects) || subjects.length === 0) {
 		return <p className="loading">Loading your subjects...</p>;
 	}
+
+	if (!Array.isArray(subjects) || subjects.length === 0) {
+		return <p className="loading">Loading your subjects...</p>;
+	}
+
+	const [xp, setXp] = useState(Number(localStorage.getItem("learner-xp")) || 0);
+
+	useEffect(() => {
+		const updateXp = () =>
+			setXp(Number(localStorage.getItem("learner-xp")) || 0);
+
+		window.addEventListener("xp-updated", updateXp);
+		return () => window.removeEventListener("xp-updated", updateXp);
+	}, []);
 
 	return (
 		<div className="kid-dashboard">
@@ -19,7 +34,7 @@ export default function LearnerDashBoard({ subjects = [] }) {
 			<div className="stats-bar">
 				<div className="stat">
 					<span className="stat-icon">⭐</span>
-					<span className="stat-value">120 XP</span>
+					<span className="stat-value">{xp}XP</span>
 				</div>
 
 				<div className="stat">
