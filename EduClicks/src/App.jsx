@@ -13,13 +13,13 @@ import LearnerQuiz from "./pages/LearnerQuiz";
 import PdfViewer from "./pages/PdfViewer";
 import UploadPdf from "./pages/UploadPdf";
 
-import { subjects as initialSubjects } from "./data/subjects";
+import { generateSubjects } from "./data/generateSubjects";
 
 export default function App() {
 	/* ---------------- STATE ---------------- */
 	const [subjects, setSubjects] = useState(() => {
 		const saved = localStorage.getItem("subjects");
-		return saved ? JSON.parse(saved) : initialSubjects;
+		return saved ? JSON.parse(saved) : generateSubjects();
 	});
 
 	/* ---------------- PERSIST DATA ---------------- */
@@ -45,9 +45,7 @@ export default function App() {
 			/>
 			<Route
 				path="/quiz/:subjectId/:term/:quizIndex"
-				element={
-					<LearnerQuiz subjects={subjects} setSubjects={setSubjects} />
-				}
+				element={<LearnerQuiz subjects={subjects} setSubjects={setSubjects} />}
 			/>
 
 			{/* TEACHER */}
@@ -59,21 +57,15 @@ export default function App() {
 			/>
 			<Route
 				path="/create-quiz"
-				element={
-					<CreateQuiz subjects={subjects} setSubjects={setSubjects} />
-				}
+				element={<CreateQuiz subjects={subjects} setSubjects={setSubjects} />}
 			/>
 			<Route
 				path="/edit-quiz/:subjectId/:term/:quizIndex"
-				element={
-					<EditQuiz subjects={subjects} setSubjects={setSubjects} />
-				}
+				element={<EditQuiz subjects={subjects} setSubjects={setSubjects} />}
 			/>
 			<Route
 				path="/upload-pdf"
-				element={
-					<UploadPdf subjects={subjects} setSubjects={setSubjects} />
-				}
+				element={<UploadPdf subjects={subjects} setSubjects={setSubjects} />}
 			/>
 
 			{/* SHARED */}
