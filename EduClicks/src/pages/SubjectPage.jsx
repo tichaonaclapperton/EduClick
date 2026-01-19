@@ -16,7 +16,7 @@ export default function SubjectPage({ subjects = [] }) {
 	}
 
 	return (
-		<div className="screen">
+		<div className="sub-screen">
 			<h2>{syllabus.name}</h2>
 
 			{syllabus.terms.map((syllTerm) => {
