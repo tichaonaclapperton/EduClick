@@ -1,28 +1,57 @@
 import { useNavigate } from "react-router-dom";
+import '../style/subCard.css'
 
 export default function SubCard({ subject }) {
 	const navigate = useNavigate();
 
 	// ✅ SAFELY handle missing terms
-	const terms = Array.isArray(subject?.terms) ? subject.terms : [];
+	// const terms = Array.isArray(subject?.terms) ? subject.terms : [];
 
-	const quizCount = terms.reduce(
-		(total, term) => total + (term.quizzes?.length || 0),
-		0
-	);
+	const totalQuizzes =
+		subject.terms?.reduce((sum, t) => sum + (t.quizzes?.length || 0), 0) || 0;
+
+		const completedQuizzes =
+		subject.terms?.reduce(
+			(sum, t) => sum + (t.quizzes?.filter((q) => q.completed)?.length || 0),
+			0
+		) || 0;
+
+	const progress =
+		totalQuizzes > 0 ? Math.round((completedQuizzes / totalQuizzes) * 100) : 0;
+
+	// const quizCount = terms.reduce(
+	// 	(total, term) => total + (term.quizzes?.length || 0),
+	// 	0
+	// );
 
 	return (
-		<div
-			className="subject-tile"
-			onClick={() => navigate(`/subject/${subject.id}`)}
-		>
-			<div className="subject-icon">{subject.icon}</div>
+		// <div
+		// 	className="subject-tile"
+		// 	onClick={() => navigate(`/subject/${subject.id}`)}
+		// >
+		// 	<div className="subject-icon">{subject.icon}</div>
 
-			<h3 className="subject-title">{subject.name}</h3>
+		// 	<h3 className="subject-title">{subject.name}</h3>
 
-			<p className="subject-info">
-				📝 {quizCount} Quiz{quizCount !== 1 && "zes"}
-			</p>
+		// 	<p className="subject-info">
+		// 		📝 {quizCount} Quiz{quizCount !== 1 && "zes"}
+		// 	</p>
+		// </div>
+		<div className="subcard">
+			<div className="subcard-header">
+				<span className="icon">{subject.icon}</span>
+				<h4>{subject.name}</h4>
+			</div>
+
+			<progress value={progress} max="100" />
+			<p className="progress-text">{progress}% completed</p>
+
+			<button
+				className="view-btn"
+				onClick={() => navigate(`/subject/${subject.id}`)}
+			>
+				🚀 View Subject
+			</button>
 		</div>
 	);
 }
