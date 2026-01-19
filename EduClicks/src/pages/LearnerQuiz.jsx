@@ -1,130 +1,151 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { getNextQuiz } from "../utils/getNextQuiz";
+import confetti from "canvas-confetti"; // ✅ install once: npm i canvas-confetti
 
 export default function LearnerQuiz({ subjects = [], setSubjects }) {
 	const { subjectId, term, quizIndex } = useParams();
-
-	const termNumber = Number(term);
-	const index = Number(quizIndex);
-
-	/* ---------------- FIND QUIZ ---------------- */
-
-	const subject = subjects.find((s) => s.id === subjectId);
-	if (!subject) return <p>Subject not found</p>;
-
-	const termData = subject.terms?.find((t) => t.term === termNumber);
-	if (!termData) return <p>Term not found</p>;
-
-	const quiz = termData.quizzes?.[index];
-	if (!quiz) return <p>Quiz not found</p>;
-
-	/* ---------------- STATE ---------------- */
-
+	const navigate = useNavigate();
 	const [answers, setAnswers] = useState({});
 
-	const selectAnswer = (qIndex, oIndex) => {
-		setAnswers((prev) => ({
-			...prev,
-			[qIndex]: oIndex,
-		}));
+	const subject = subjects.find((s) => s.id === subjectId);
+	const termData = subject?.terms.find((t) => t.term === Number(term));
+	const quiz = termData?.quizzes[Number(quizIndex)];
+
+	if (!quiz) return <p className="error">Quiz not found</p>;
+
+	// 🚫 Prevent re-attempt
+	if (quiz.completed) {
+		return (
+			<div className="screen">
+				<h2>🧠 {quiz.title}</h2>
+				<p className="muted">✅ You already completed this quiz</p>
+				<button onClick={() => navigate("/learner")}>⬅ Back</button>
+			</div>
+		);
+	}
+
+	const handleSelect = (qIndex, optionIndex) => {
+		setAnswers({ ...answers, [qIndex]: optionIndex });
 	};
 
-	/* ---------------- DEADLINE ---------------- */
+	const finishQuiz = () => {
+		// ✅ Calculate score
+		let score = 0;
+		quiz.questions.forEach((q, i) => {
+			if (answers[i] === q.correct) score++;
+		});
 
-	const now = new Date();
-	const deadline = quiz.deadline ? new Date(quiz.deadline) : null;
-	const isLocked = deadline && now > deadline;
+		const allCorrect = score === quiz.questions.length;
+		const xpEarned = allCorrect ? 10 : 0;
 
-	const learnerId = "learner-001";
+		/* ===============================
+		   ✅ XP (single source of truth)
+		=============================== */
+		const currentXp = Number(localStorage.getItem("learner-xp")) || 0;
+		const newXp = currentXp + xpEarned;
 
-	const hasSubmitted = quiz.submissions?.some(
-		(sub) => sub.learnerId === learnerId
-	);
+		localStorage.setItem("learner-xp", newXp);
+		window.dispatchEvent(new Event("xpUpdated"));
 
-	/* ---------------- SUBMIT QUIZ ---------------- */
-
-	const submitQuiz = () => {
-		if (isLocked) {
-			alert("⏰ Deadline has passed");
-			return;
+		/* ===============================
+		   🎉 Confetti
+		=============================== */
+		if (allCorrect) {
+			confetti({
+				particleCount: 120,
+				spread: 70,
+				origin: { y: 0.6 },
+			});
 		}
 
-		if (hasSubmitted) {
-			alert("You already submitted this quiz");
-			return;
-		}
-
-		// ✅ CALCULATE SCORE ONCE
-		const score = quiz.questions.reduce(
-			(total, q, i) =>
-				answers[i] === q.correct ? total + 1 : total,
-			0
-		);
-
-		// ✅ XP LOGIC (10 XP PER CORRECT ANSWER)
-		const xpEarned = score * 10;
-
-		const submission = {
-			learnerId,
-			learnerName: "Thando",
-			answers,
-			score,
-			xp: xpEarned,
-			submittedAt: new Date().toISOString(),
-		};
-
-		const updatedSubjects = subjects.map((s) => {
-			if (s.id !== subjectId) return s;
+		/* ===============================
+		   ✅ Update subjects (quiz completed)
+		=============================== */
+		const updatedSubjects = subjects.map((subj) => {
+			if (subj.id !== subjectId) return subj;
 
 			return {
-				...s,
-				terms: s.terms.map((t) =>
-					t.term === termNumber
-						? {
-								...t,
-								quizzes: t.quizzes.map((q, i) =>
-									i === index
-										? {
-												...q,
-												submissions: [
-													...(q.submissions || []),
-													submission,
-												],
-										  }
-										: q
-								),
-						  }
-						: t
-				),
+				...subj,
+				terms: subj.terms.map((t) => {
+					if (t.term !== Number(term)) return t;
+
+					return {
+						...t,
+						quizzes: t.quizzes.map((q, i) =>
+							i === Number(quizIndex)
+								? {
+										...q,
+										completed: true,
+										submissions: [
+											...(q.submissions || []),
+											{
+												learner: "Thando",
+												score,
+												xp: xpEarned,
+												submittedAt: new Date().toISOString(),
+											},
+										],
+								  }
+								: q
+						),
+					};
+				}),
 			};
 		});
+		// 🔥 DAILY STREAK UPDATE
+		const today = new Date().toDateString();
+		const last = localStorage.getItem("last-activity");
+		let streak = Number(localStorage.getItem("streak")) || 0;
+
+		if (last !== today) {
+			streak++;
+			localStorage.setItem("streak", streak);
+			localStorage.setItem("last-activity", today);
+		}
 
 		setSubjects(updatedSubjects);
 
-		alert(
-			`🎉 You scored ${score}/${quiz.questions.length}\n🏆 XP earned: ${xpEarned}`
-		);
+		/* ===============================
+		   🔁 Navigate to next quiz (if any)
+		=============================== */
+		const nextQuiz = getNextQuiz(updatedSubjects, {
+			subjectId,
+			term,
+			quizIndex,
+		});
+
+		if (nextQuiz) {
+			navigate(
+				`/quiz/${nextQuiz.subjectId}/${nextQuiz.term}/${nextQuiz.quizIndex}`
+			);
+		} else {
+			navigate("/learner");
+		}
+
+		/* ===============================
+		   📢 Feedback
+		=============================== */
+		if (allCorrect) {
+			alert(`🎉 Perfect score! +${xpEarned} XP`);
+		} else {
+			alert(`You scored ${score}/${quiz.questions.length}`);
+		}
 	};
 
-	/* ---------------- UI ---------------- */
-
 	return (
-		<div className="screen">
-			<h2>{quiz.title}</h2>
+		<div className="screen quiz-screen">
+			<h2>🧠 {quiz.title}</h2>
 
-			{quiz.deadline && (
-				<p>Deadline: {new Date(quiz.deadline).toLocaleString()}</p>
-			)}
+			{quiz.questions.map((q, i) => (
+				<div key={i} className="question">
+					<p>{q.question}</p>
 
-			{quiz.questions.map((q, qIndex) => (
-				<div key={qIndex} className="quiz-question">
-					<h4>{q.question}</h4>
-
-					{q.options.map((opt, oIndex) => (
+					{q.options.map((opt, j) => (
 						<button
-							key={oIndex}
-							className={answers[qIndex] === oIndex ? "active" : ""}
-							onClick={() => selectAnswer(qIndex, oIndex)}
+							key={j}
+							className={answers[i] === j ? "selected" : ""}
+							onClick={() => handleSelect(i, j)}
 						>
 							{opt}
 						</button>
@@ -132,16 +153,8 @@ export default function LearnerQuiz({ subjects = [], setSubjects }) {
 				</div>
 			))}
 
-			<button
-				className="submit"
-				onClick={submitQuiz}
-				disabled={isLocked || hasSubmitted}
-			>
-				{isLocked
-					? "Quiz locked"
-					: hasSubmitted
-					? "Already submitted"
-					: "Submit quiz"}
+			<button className="finish-btn" onClick={finishQuiz}>
+				🎉 Finish challenge and get 10xp
 			</button>
 		</div>
 	);
