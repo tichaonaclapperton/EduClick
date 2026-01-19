@@ -30,7 +30,7 @@ export default function AvailableQuizzes({ subjects = [] }) {
 		);
 	}
 	return (
-		<div className="screen">
+		<div className="screen empty-state">
 			<h2>🧠Challenge Hub</h2>
 			{quizzes.map((q, i) => (
 				<button
