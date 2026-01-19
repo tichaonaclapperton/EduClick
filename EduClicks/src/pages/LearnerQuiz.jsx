@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getNextQuiz } from "../utils/getNextQuiz";
+import '../style/learnerQuiz.css'
 import confetti from "canvas-confetti"; // ✅ install once: npm i canvas-confetti
 
 export default function LearnerQuiz({ subjects = [], setSubjects }) {
@@ -17,7 +18,7 @@ export default function LearnerQuiz({ subjects = [], setSubjects }) {
 	// 🚫 Prevent re-attempt
 	if (quiz.completed) {
 		return (
-			<div className="screen">
+			<div className="empty-state">
 				<h2>🧠 {quiz.title}</h2>
 				<p className="muted">✅ You already completed this quiz</p>
 				<button onClick={() => navigate("/learner")}>⬅ Back</button>
