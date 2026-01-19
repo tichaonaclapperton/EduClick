@@ -6,7 +6,7 @@ export default function Login() {
 
 	return (
 		<div className="login-screen">
-			<h1 className="app-title">🎓 EduClicks</h1>
+			<h1 className="app-title">🎓 <span>Edu</span>Clicks <span className="title-pencil">✏️</span></h1>
 			<p className="subtitle">Learning made fun!</p>
 
 			<div className="login-card">
