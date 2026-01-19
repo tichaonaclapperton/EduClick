@@ -12,24 +12,31 @@ import SubjectPage from "./pages/SubjectPage";
 import LearnerQuiz from "./pages/LearnerQuiz";
 import PdfViewer from "./pages/PdfViewer";
 import UploadPdf from "./pages/UploadPdf";
+import AvailableQuizzes from "./pages/AvailableQuizzes";
 
 import { generateSubjects } from "./data/generateSubjects";
 
 export default function App() {
 	/* ---------------- STATE ---------------- */
 
-	const SUBJECTS_VERSION = "v2";
+	// const SUBJECTS_VERSION = "v2";
+	// const [subjects, setSubjects] = useState(() => {
+	// 	const saved = localStorage.getItem("subjects");
+		
+	// 	const savedVersion = localStorage.getItem("subjects_version");
+
+	// 	if (saved && savedVersion === SUBJECTS_VERSION) {
+	// 		return JSON.parse(saved);
+	// 	}
+
+	// 	const fresh = generateSubjects();
+	// 	localStorage.setItem("subjects_version", SUBJECTS_VERSION);
+	// 	return fresh;
+	// });
+
 	const [subjects, setSubjects] = useState(() => {
 		const saved = localStorage.getItem("subjects");
-		const savedVersion = localStorage.getItem("subjects_version");
-
-		if (saved && savedVersion === SUBJECTS_VERSION) {
-			return JSON.parse(saved);
-		}
-
-		const fresh = generateSubjects();
-		localStorage.setItem("subjects_version", SUBJECTS_VERSION);
-		return fresh;
+		return saved ? JSON.parse(saved) : generateSubjects();
 	});
 
 	/* ---------------- PERSIST DATA ---------------- */
@@ -48,6 +55,10 @@ export default function App() {
 			<Route
 				path="/learner"
 				element={<LearnerDashBoard subjects={subjects} />}
+			/>
+			<Route
+				path="/quizzes"
+				element={<AvailableQuizzes subjects={subjects} />}
 			/>
 			<Route
 				path="/subject/:subjectId"
