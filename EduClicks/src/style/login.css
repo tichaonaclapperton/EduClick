@@ -10,20 +10,56 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background: linear-gradient(135deg, #4dabf7, #74c0fc);
+	background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../assets/bckground.png') center;
 	padding: 20px;
 	font-family: "Poppins", sans-serif;
 }
 
 /* APP TITLE */
-.app-title {
+.app-title span{
 	font-size: 2.5rem;
-	color: white;
+	color: #ffd43b;
 	margin-bottom: 5px;
 }
 
-.subtitle {
-	color: #e7f5ff;
+.app-title {
+	text-align: center;
+	font-size: 2.5rem;
+	font-weight: 800;
+	margin-bottom: 0.5rem;
+  }
+  
+  .title-pencil {
+	display: block;
+	font-size: 1.6rem;
+	margin-top: 0.25rem;
+  
+	/* animation */
+	animation: pencil-wiggle 1.6s ease-in-out infinite;
+  }
+  
+  /* ✏️ playful wiggle */
+  @keyframes pencil-wiggle {
+	0% {
+	  transform: translateX(0) rotate(0deg);
+	}
+	25% {
+	  transform: translateX(-4px) rotate(-8deg);
+	}
+	50% {
+	  transform: translateX(4px) rotate(8deg);
+	}
+	75% {
+	  transform: translateX(-2px) rotate(-4deg);
+	}
+	100% {
+	  transform: translateX(0) rotate(0deg);
+	}
+  }
+  
+
+p.subtitle  {
+	color: #da000b;
 	margin-bottom: 25px;
 }
 
