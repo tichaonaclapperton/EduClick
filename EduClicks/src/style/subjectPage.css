@@ -1,12 +1,11 @@
 /* PAGE */
-.screen {
+.sub-screen {
 	padding: 20px;
-	background: #f4f9ff;
 	min-height: 100vh;
 }
 
 /* SUBJECT TITLE */
-.screen h2 {
+.sub-screen h2 {
 	text-align: center;
 	font-size: 2rem;
 	margin-bottom: 20px;
@@ -15,7 +14,8 @@
 
 /* TERM CARD */
 .term-block {
-	background: #ffffff;
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)),
+		url("../assets/bckground.png");
 	border-radius: 20px;
 	padding: 20px;
 	margin-bottom: 20px;
