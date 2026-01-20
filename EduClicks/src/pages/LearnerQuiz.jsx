@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getNextQuiz } from "../utils/getNextQuiz";
-import '../style/learnerQuiz.css'
+import "../style/learnerQuiz.css";
 import confetti from "canvas-confetti"; // ✅ install once: npm i canvas-confetti
 
 export default function LearnerQuiz({ subjects = [], setSubjects }) {
@@ -27,10 +27,18 @@ export default function LearnerQuiz({ subjects = [], setSubjects }) {
 	}
 
 	const handleSelect = (qIndex, optionIndex) => {
-		setAnswers({ ...answers, [qIndex]: optionIndex });
+		setAnswers((prev) => ({
+			...prev,
+			[qIndex]: optionIndex,
+		}));
 	};
 
 	const finishQuiz = () => {
+		if (Object.keys(answers).length < quiz.questions.length) {
+			alert("❗ Please answer all questions before submitting");
+			return;
+		}
+
 		// ✅ Calculate score
 		let score = 0;
 		quiz.questions.forEach((q, i) => {
@@ -134,9 +142,14 @@ export default function LearnerQuiz({ subjects = [], setSubjects }) {
 		}
 	};
 
+	const allAnswered = Object.keys(answers).length === quiz.questions.length;
+
 	return (
 		<div className="screen quiz-screen">
 			<h2>🧠 {quiz.title}</h2>
+			<p className="muted">
+				Answered {Object.keys(answers).length} / {quiz.questions.length}
+			</p>
 
 			{quiz.questions.map((q, i) => (
 				<div key={i} className="question">
@@ -154,7 +167,11 @@ export default function LearnerQuiz({ subjects = [], setSubjects }) {
 				</div>
 			))}
 
-			<button className="finish-btn" onClick={finishQuiz}>
+			<button
+				className="finish-btn"
+				onClick={finishQuiz}
+				disabled={!allAnswered}
+			>
 				🎉 Finish challenge and get 10xp
 			</button>
 		</div>
