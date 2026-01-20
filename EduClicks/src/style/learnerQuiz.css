@@ -100,4 +100,11 @@
   .empty-state h3 {
 	margin-top: 0.5rem;
   }
+
+  .finish-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	transform: none;
+  }
+  
   
